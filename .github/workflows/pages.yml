@@ -1,9 +1,9 @@
 name: Build and publish blog
 
 on:
-  push:                       # adding or changing a post publishes it (about 1-2 minutes)
+  push:                        # adding or changing a post publishes it (about 1-2 minutes)
     branches: [main]
-  workflow_dispatch:          # lets you run it by hand from the Actions tab
+  workflow_dispatch:           # lets you run it by hand from the Actions tab
 
 permissions:
   contents: read
@@ -26,6 +26,8 @@ jobs:
           node-version: 20
       - run: npm install --no-audit --no-fund
       - run: node build.mjs
+        env:
+          BASE_URL: https://blog.repdbylove.com
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
